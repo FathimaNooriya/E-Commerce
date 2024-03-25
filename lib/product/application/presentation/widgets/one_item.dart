@@ -46,7 +46,7 @@ class OneIteam extends StatelessWidget {
               SizedBox(
                 height: MediaQuery.of(context).size.height * .09,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       product.title!,
