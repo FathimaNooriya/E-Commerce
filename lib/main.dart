@@ -1,10 +1,12 @@
+import 'package:e_commerce/cart/application/business_logic/bloc/cart_bloc.dart';
 import 'package:e_commerce/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'application/business_logic/bloc/product_bloc.dart';
-import 'application/presentation/screens/home.dart';
+import 'cart/data/repository/cart_repo_impl.dart';
+import 'product/application/business_logic/bloc/product_bloc.dart';
+import 'product/application/presentation/screens/home.dart';
+import 'product/data/repository/product_repo_impl.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +24,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ProductBloc()),
+        BlocProvider(create: (context) => ProductBloc(ProductRepoImpl())),
+        BlocProvider(
+          create: (context) => CartBloc(CartRepoImpl()),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -46,7 +51,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: HomeScreen(),
+        home: const HomeScreen(),
       ),
     );
   }
